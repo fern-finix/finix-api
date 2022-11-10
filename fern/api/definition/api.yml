@@ -1,10 +1,10 @@
 name: api
-auth: bearer
+auth: basic
 environments:
   Production:
-    url: 
-    docs:
+    url: https://finix.payments-api.com/
+    docs: where payments are processed 
   Sandbox:
-    url:
-    docs:
+    url: https://finix.sandbox-payments-api.com
+    docs: for testing 
 default-environment: Production

@@ -1,0 +1,115 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+services:
+  http:
+    IdentityService:
+      base-path: /identities
+      auth: true
+      endpoints:
+        create:
+          docs: Create an Identity for your seller or buyer.
+          path: /
+          method: POST
+          request: CreateIdentityRequest
+          response: CreateIdentityResponse
+
+types:
+  CreateIdentityRequest:
+    docs: An Identity resource represents either a person or business in Finix. You'll create an Identity to onboard your sellers, and verify the different owners.
+    union:
+      merchant: MerchantRequest
+      buyer: BuyerRequest
+
+  MerchantRequest:
+    properties:
+      additional_underwriting_data: AdditionalUnderwritingData
+
+  AdditionalUnderwritingData:
+    properties:
+      annual_ach_volume:
+        type: optional<integer>
+        docs: The approximate annual ACH sales expected to be processed (in cents) by this merchant (max 10 characters).
+      average_ach_transfer_amount:
+        type: optional<integer>
+        docs: The approximate average ACH sale amount (in cents) for this merchant.
+      average_card_transfer_amount:
+        type: optional<integer>
+        docs: The average credit card sale amount (in cents) for this merchant.
+      business_description:
+        type: string
+        docs: Description of this merchant's business (max 200 characters).
+      # etc.
+
+  BuyerRequest:
+    properties:
+      entity:
+        docs: The underwriting details required to verify Identities.
+        type: Entity
+      tags:
+        docs: Key value pair for annotating custom meta data (e.g. order numbers).
+        type: Tags
+
+  Entity:
+    properties:
+      email: optional<string>
+      first_name: optional<string>
+      last_name: optional<string>
+      personal_address:
+        type: optional<Address>
+        docs: The billing address of the buyer. This field is used for identity verification purposes.
+      phone:
+        type: optional<string>
+        docs: Phone number where the buyer can be reached.
+
+  Tags:
+    properties:
+      property_name: optional<string>
+
+  CreateIdentityResponse:
+    union:
+      merchant: MerchantResponse
+      buyer: BuyerResponse
+      associated: AssociatedResponse
+
+  BuyerResponse:
+    properties:
+      id:
+        type: string
+        docs: The ID of the Identity resource.
+      created_at:
+        type: datetime
+        docs: Timestamp of when the object was created.
+      application:
+        type: string
+        docs: ID of the Application associated with the Identity.
+
+  AssociatedResponse:
+    properties:
+      id:
+        type: string
+        docs: The ID of the Identity resource.
+      created_at:
+        type: datetime
+        docs: Timestamp of when the object was created.
+      application:
+        type: string
+        docs: ID of the Application associated with the Identity.
+
+  Address:
+    properties:
+      street_number: string
+      street_name: string
+      city: string
+      state: string
+
+  MerchantResponse: 
+    properties:
+      id:
+        type: string
+        docs: The ID of the Identity resource.
+      created_at:
+        type: datetime
+        docs: Timestamp of when the object was created.
+      application:
+        type: string
+        docs: ID of the Application associated with the Identity.

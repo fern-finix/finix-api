@@ -3,26 +3,26 @@ release:
     version: 0.0.227
     publishing:
       npm:
-        package-name: '@fern-api/{company}'
+        package-name: "@fern-api/finix"
         token: ${FERN_NPM_TOKEN}
     github:
-      repository: fern-{company}/{company}-node
-      
-  - name: fernapi/fern-java-sdk
-    version: 0.0.128
-    publishing:
-      maven:
-        coordinate: io.github.fern-api:{company}
-        username: ${FERN_MAVEN_USERNAME}
-        password: ${FERN_MAVEN_TOKEN}
-    github:
-      repository: fern-{company}/{company}-java
-      
-  - name: fernapi/fern-openapi
-    version: 0.0.10
-    github:
-      repository: fern-{company}/{company}-openapi
-      
+      repository: fern-finix/finix-node
+
+  # - name: fernapi/fern-java-sdk
+  #   version: 0.0.128
+  #   publishing:
+  #     maven:
+  #       coordinate: io.github.fern-api:finix
+  #       username: ${FERN_MAVEN_USERNAME}
+  #       password: ${FERN_MAVEN_TOKEN}
+  #   github:
+  #     repository: fern-finix/finix-java
+
+  # - name: fernapi/fern-openapi
+  #   version: 0.0.10
+  #   github:
+  #     repository: fern-finix/finix-openapi
+
   - name: fernapi/fern-postman
     version: 0.0.28
     publishing:
@@ -30,4 +30,4 @@ release:
         api-key: ${FERN_POSTMAN_API_KEY}
         workspace-id: ${FERN_POSTMAN_WORKSPACE_ID}
     github:
-      repository: fern-{company}/{company}-postman
+      repository: fern-finix/finix-postman

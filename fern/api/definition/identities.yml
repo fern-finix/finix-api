@@ -13,6 +13,37 @@ services:
           request: CreateIdentityRequest
           response: CreateIdentityResponse
 
+        list: 
+          docs: Retrieves a list of Identities.
+          method: GET 
+          path: /
+          response: list<Identity>
+        
+        fetch: 
+          docs: Retrieve the details of a previously created Identity.
+          path: /{identity_id}
+          path-parameters:
+            identity_id: string 
+          method: GET 
+          response: Identity 
+
+        update: 
+          docs: Update an existing Identity.
+          method: PUT 
+          path: /{identity_id}/verifications
+          path-parameters:
+            identity_id: string 
+          request: Identity
+          response: Identity 
+
+        verify: 
+          docs: Verify an Identity.
+          method: POST 
+          path: /{identity_id}/verifications
+          path-parameters:
+            identity_id: string 
+          response: Identity 
+
 types:
   CreateIdentityRequest:
     docs: An Identity resource represents either a person or business in Finix. You'll create an Identity to onboard your sellers, and verify the different owners.

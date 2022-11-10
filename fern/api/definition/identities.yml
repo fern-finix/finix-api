@@ -11,7 +11,7 @@ services:
           path: /
           method: POST
           request: CreateIdentityRequest
-          response: CreateIdentityResponse
+          response: Identity
 
         list: 
           docs: Retrieves a list of Identities.
@@ -96,7 +96,7 @@ types:
     properties:
       property_name: optional<string>
 
-  CreateIdentityResponse:
+  Identity:
     union:
       merchant: MerchantResponse
       buyer: BuyerResponse
